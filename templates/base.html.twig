@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="icon" href="{{ asset('favicon_knowledge.png') }}" type="image/png">
+        {% block stylesheets %}
+        {% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="header">
+            <div class="logo">
+                <a href="{{ path('app_home') }}"><img src="/logo_knowledge.jfif" alt="logo" width="200"></a>
+            </div>
+            <nav>
+                <ul>
+                    {% if not app.user %}
+                        <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                        <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                        <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('app_admin_dashboard') }}">Back-Office</a></li>
+                        {% elseif is_granted('ROLE_USER') %}
+                            <li><a href="{{ path('cart_show') }}">Panier</a></li>
+                            <li><a href="{{ path('user_lessons') }}">Mes Leçons</a></li>
+                            <li><a href="{{ path('user_certifications') }}">Mes Certifications</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% block body %}{% endblock %}
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </main>
+
+        <footer class="footer">
+            <div class="footer-row">
+                <div class="label">Nom de la société :</div>
+                <div class="value">Knowledge</div>
+            </div>
+            <div class="footer-row">
+                <div class="label">Adresse :</div>
+                <div class="value">10 rue de Paris, PARIS</div>
+            </div>
+            <div class="footer-row">
+                <div class="label">Adresse de contact :</div>
+                <div class="value">Knowledge_learning@blabla.com</div>
+            </div>
+        </footer>
+    </body>
+</html>

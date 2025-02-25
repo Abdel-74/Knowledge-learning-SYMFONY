@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ theme.name }} - Cursus{% endblock %}
+
+{% block body %}
+    <h1 class="text-center text-primary">{{ theme.name }}</h1>
+
+    <div class="container mt-4">
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3 mb-4" style="border-left: 5px solid #cd2c2e;">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">{{ course.name }} ({{ course.price }}€)</h5>
+                            
+                            {% if app.user and app.user.isVerified %}
+                                <a href="{{ path('course_detail', {id: course.id}) }}" class="btn btn-primary">Voir les leçons</a>
+                                <a href="{{ path('purchase_course', {id: course.id}) }}" class="btn btn-buy">Ajouter au panier</a>
+                            {% else %}
+                                <p class="text-danger">Activez votre compte pour acheter ce cursus.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun cursus disponible.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

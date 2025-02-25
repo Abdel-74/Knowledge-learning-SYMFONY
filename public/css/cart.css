@@ -1,0 +1,39 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.remove-btn{
+    display: inline-block;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #cd2c2e;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-secondary {
+    background-color: #384050;
+}
+
+.btn-secondary:hover {
+    background-color: #4c576b; 
+}

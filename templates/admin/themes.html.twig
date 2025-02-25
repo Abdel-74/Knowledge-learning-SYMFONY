@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des thèmes{% endblock %}
+
+{% block body %}
+
+<h1>Thèmes</h1>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    {% for theme in themes %}
+        <tr>
+            <td>{{ theme.id }}</td>
+            <td>{{ theme.name }}</td>
+            <td>
+                <a href="{{ path('app_admin_theme_edit', {'id': theme.id}) }}" class="btn btn-primary">Modifier</a>
+                <form action="{{ path('app_admin_theme_delete', {'id': theme.id}) }}" method="post">
+                    <button type="submit" class="btn remove-btn">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

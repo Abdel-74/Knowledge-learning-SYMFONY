@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ course.name }} - Leçons{% endblock %}
+
+{% block body %}
+    <h1 class="text-center text-primary">{{ course.name }}</h1>
+
+    <div class="container mt-4">
+        <div class="row">
+            {% for lesson in lessons %}
+                <div class="col-md-6">
+                    <div class="card shadow-sm p-3 mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">{{ lesson.name }} ({{ lesson.price }}€)</h5>
+                            
+                            {% if app.user and app.user.isVerified %}
+                                {% if userPurchases[lesson.id] is defined and userPurchases[lesson.id] %}
+                                    <a href="{{ path('lesson_detail', {id: lesson.id}) }}" class="btn btn-primary">Accéder</a>
+                                {% else %}
+                                    <a href="{{ path('purchase_lesson', {id: lesson.id}) }}" class="btn btn-buy">Ajouter au panier</a>
+                                {% endif %}
+                            {% else %}
+                                <p class="text-danger">Activez votre compte pour acheter cette leçon.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucune leçon disponible.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

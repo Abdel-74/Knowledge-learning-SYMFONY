@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Utilisateurs</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|json_encode }}</td>
+                <td>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
+                    <form action="{{ path('app_admin_user_delete', {'id': user.id}) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn remove-btn">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Dashboard{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Tableau de bord - Administration</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Utilisateurs</h5>
+                    <p class="card-text">{{ users|length }} inscrits</p>
+                    <a href="{{ path('app_admin_users') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Thèmes</h5>
+                    <p class="card-text">{{ themes|length }} thèmes</p>
+                    <a href="{{ path('app_admin_themes') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Cursus</h5>
+                    <p class="card-text">{{ courses|length }} cursus disponibles</p>
+                    <a href="{{ path('app_admin_courses') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Leçons</h5>
+                    <p class="card-text">{{ lessons|length }} leçons disponibles</p>
+                    <a href="{{ path('app_admin_lessons') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Achats</h5>
+                    <p class="card-text">{{ purchases|length }} achats réalisés</p>
+                    <a href="{{ path('app_admin_purchases') }}" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

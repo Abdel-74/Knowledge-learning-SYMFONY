@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Leçons{% endblock %}
+
+{% block body %}
+    <h1>Mes Leçons</h1>
+    <table class="table">
+        {% for lesson in lessons %}
+            <tr>
+                <td>
+                    {{ lesson.name }}
+                </td>
+                <td>
+                    {% if lesson in app.user.validatedLessons %}
+                        <p>&#9989;</p>
+                    {% else %}
+                        <a href="{{ path('lesson_detail', {id: lesson.id}) }}" class="btn btn-primary">Accéder</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <p>Aucune leçon achetée.</p>
+        {% endfor %}
+    </table>
+{% endblock %}

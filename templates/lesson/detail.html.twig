@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lesson.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-center text-primary">{{ lesson.name }}</h1>
+        <p class="text-muted">Cursus : {{ lesson.course.name }}</p>
+
+        <div class="lesson-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae tincidunt libero...</p>
+        </div>
+
+        <form action="{{ path('validate_lesson', {id: lesson.id}) }}" method="post">
+            <button type="submit" class="btn btn-primary">Valider la leçon</button>
+        </form>
+    </div>
+{% endblock %}

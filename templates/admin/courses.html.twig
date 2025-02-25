@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des cursus{% endblock %}
+
+{% block body %}
+
+<h1>Cursus</h1>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Actions</th>
+    </tr>
+    {% for course in courses %}
+        <tr>
+            <td>{{ course.id }}</td>
+            <td>{{ course.name }}</td>
+            <td>{{ course.price }}€</td>
+            <td>
+                <a href="{{ path('app_admin_course_edit', {'id': course.id}) }}" class="btn btn-primary">Modifier</a>
+                <form action="{{ path('app_admin_course_delete', {'id': course.id}) }}" method="post">
+                    <button type="submit" class="btn remove-btn">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

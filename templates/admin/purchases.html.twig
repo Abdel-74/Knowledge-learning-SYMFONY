@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Achats{% endblock %}
+
+{% block body %}
+    <h1>Achats</h1>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Utilisateur</th>
+            <th>Cursus</th>
+            <th>Leçon</th>
+            <th>Statut</th>
+            <th>Payé</th>
+            <th>Actions</th>
+        </tr>
+        {% for purchase in purchases %}
+            <tr>
+                <td>{{ purchase.id }}</td>
+                <td>{{ purchase.user.id }}</td>
+                <td>
+                    {% if purchase.course %}
+                        {{ purchase.course.id }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% if purchase.lesson %}
+                        {{ purchase.lesson.id }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ purchase.status }}</td>
+                <td>
+                    {% if purchase.isPaid %}
+                        <span class="text-success">&#10004;</span> 
+                    {% else %}
+                        <span class="text-danger">&#10008;</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_admin_purchase_edit', {'id': purchase.id}) }}" class="btn btn-primary">Modifier</a>
+                    <form action="{{ path('app_admin_purchase_delete', {'id': purchase.id}) }}" method="post">
+                        <button type="submit" class="btn remove-btn">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun achat trouvé.</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
